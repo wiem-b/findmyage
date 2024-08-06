@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Age Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        input {
+            padding: 10px;
+            font-size: 1em;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 1em;
+        }
+    </style>
+</head>
+<body>
+    <h1>Enter Your Birth Year</h1>
+    <form id="ageForm">
+        <input type="number" id="birthYear" placeholder="e.g., 1990" required>
+        <button type="submit">Calculate Age</button>
+    </form>
+    <h2 id="result"></h2>
+
+    <script>
+        document.getElementById('ageForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const birthYear = document.getElementById('birthYear').value;
+            fetch('/calculate_age', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ birthYear: birthYear })
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('result').innerText = `Your age is: ${data.age}`;
+            });
+        });
+    </script>
+</body>
+</html>
