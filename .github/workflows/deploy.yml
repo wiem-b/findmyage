@@ -5,6 +5,9 @@ on:
     branches:
       - main  # Triggers the workflow on push to the main branch
 
+      
+  workflow dispatch:
+
 jobs:
   build:
     runs-on: ubuntu-latest
