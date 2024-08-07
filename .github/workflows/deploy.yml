@@ -16,6 +16,9 @@ jobs:
     - name: Set up Docker Buildx
       run: echo Hello world
 
+    - name: show content
+      run: ls
+
 
 
 
