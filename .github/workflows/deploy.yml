@@ -58,7 +58,8 @@ jobs:
         key: ${{ secrets.NGINX_SSH_KEY }}
         port: ${{ secrets.NGINX_SSH_PORT }}
         script: |
-          docker exec find_age_container sqlite3 /app/instance/birthyears.db "SELECT * FROM birth_year;" > result.txt        
+          docker exec find_age_container sh -c "sqlite3 /app/instance/birthyears.db 'SELECT * FROM birth_year;' | tee result.txt"
+      
 
 
 
