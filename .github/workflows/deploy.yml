@@ -49,6 +49,17 @@ jobs:
           docker push wiemboukhzar/age:${{ github.sha }}
           docker run -d --name find_age_container -p 5000:5000 wiemboukhzar/age:${{ github.sha }}
 
+    # Step 7: Query the SQLite database
+    - name: Query SQLite Database
+      uses: appleboy/ssh-action@v0.1.8
+      with:
+        host: ${{ secrets.NGINX_HOST }}
+        username: ${{ secrets.NGINX_USERNAME }}
+        key: ${{ secrets.NGINX_SSH_KEY }}
+        port: ${{ secrets.NGINX_SSH_PORT }}
+        script: |
+          docker exec -it find_age_container sqlite3 /app/birthyears.db "SELECT * FROM birth_year;"          
+
 
 
 
