@@ -1,6 +1,9 @@
 # Use the official Python image from the Docker Hub
 FROM python:3.9-slim
 
+# Install SQLite command-line tool
+RUN apt-get update && apt-get install -y sqlite3
+
 # Set the working directory in the container
 WORKDIR /app
 
